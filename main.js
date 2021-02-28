@@ -5,51 +5,81 @@ const verb = ['cling', 'awaken', 'grow', 'run', 'froze', 'paid', 'shook', 'flew'
 const adverb = ['highly', 'honestly', 'nearly', 'roughly', 'rudely', 'scarcely', 'madly', 'adversely', 'rightfully', 'jealously'];
 
 // function to determine 3 random nouns
-function assignNoun() {
+function assignNoun(n) {
     let randNoun = [];
-    for (i = 0; i < 3; i++) {
+    for (let i = 0; i < n; i++) {
         randNoun.push(noun.splice(Math.random()*(noun.length-1), 1).pop())
     }
     return randNoun
 }
 
 // function to determine 4 random adjectives
-function assignAdj() {
+function assignAdj(n) {
     let randAdj = [];
-    for (i = 0; i < 4; i++) {
+    for (let i = 0; i < n; i++) {
         randAdj.push(adj.splice(Math.random()*(noun.length-1), 1).pop())
     }
     return randAdj
 }
 
 // function to determine 3 random verbs
-function assignVerb() {
+function assignVerb(n) {
     let randVerb = [];
-    for (i = 0; i < 3; i++) {
+    for (let i = 0; i < n; i++) {
         randVerb.push(verb.splice(Math.random()*(noun.length-1), 1).pop())
     }
     return randVerb
 }
 
 // function to determine 2 random adverbs
-function assignAdverb() {
+function assignAdverb(n) {
     let randAdverb = [];
-    for (i = 0; i < 2; i++) {
+    for (let i = 0; i < 2; i++) {
         randAdverb.push(adverb.splice(Math.random()*(noun.length-1), 1).pop())
     }
     return randAdverb
 }
 
-let selectNoun = assignNoun() 
-let selectAdj = assignAdj()
-let selectVerb = assignVerb()
-let selectAdverb = assignAdverb()
+// Create an array based on classes of the text
+const classes = ['adj', 'noun', 'adverb', 'verb'];
 
-// Console log tests to see the random array
-console.log(selectNoun)
-console.log(selectAdj)
-console.log(selectVerb)
-console.log(selectAdverb)
+let writeText = () => {
+    
+    for (let j = 0; j < classes.length; j++) {
+        let elements = document.getElementsByClassName(classes[j]);
 
-// Console log message to be inserted in function to randomize words.
-    console.log(`Today I went to the zoo. I saw a(n) ${selectAdj[0]} ${selectNoun[0]} jumping up and down in its tree. He ${selectVerb[0]} ${selectAdverb[0]} through the large tunnel that led to its ${selectAdj[1]} ${selectNoun[1]}. I got some peanuts and passed them through the cage to a gigantic gray ${selectNoun[2]} towering above my head. Feeding that animal made me hungry. I went to get a ${selectAdj[2]} scoop of ice cream. It filled my stomach. Afterwards I had to ${selectVerb[1]} ${selectAdverb[1]} to catch our bus. When I got home I ${selectVerb[2]} my mom for a ${selectAdj[3]} day at the zoo. `); 
+        if (classes[j] === 'adj') {
+
+            let selectAdj = assignAdj(elements.length); 
+
+            for(let y=0; y<elements.length; y++) {
+                elements[y].innerHTML = selectAdj[y];
+            }              
+        } else if (classes[j] === 'noun') {
+            
+            let selectNoun = assignNoun(elements.length); 
+
+            for(let y=0; y<elements.length; y++) {
+                elements[y].innerHTML = selectNoun[y];
+            }  
+        } else if (classes[j] === 'adverb') {
+
+            let selectAdverb = assignAdverb(elements.length); 
+
+            for(let y=0; y<elements.length; y++) {
+                elements[y].innerHTML = selectAdverb[y];
+            }  
+        } else if (classes[j] === 'verb'){
+            
+            let selectVerb = assignVerb(elements.length); 
+            
+            for(let y=0; y<elements.length; y++) {
+                elements[y].innerHTML = selectVerb[y];
+                
+            }  
+        }
+    }        
+}
+
+document.getElementById("generate").addEventListener('click', writeText);
+
