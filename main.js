@@ -31,4 +31,3 @@ for (let j = 0; j < classes.length; j++) {
 
 document.getElementById("generate").addEventListener('click', writeText);
 
-
